@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/professor")
 public class ProfessorController {
     
-
-    @GetMapping( value = "/")
+    @GetMapping( value = "/imprimir")
     public void imprimir(){
         System.out.println("chamou o metodo imprimir");
+    }
+
+
+    @GetMapping( value = "/ola")
+    public String ola() {
+        return "<h1>Júlia</h1>";
     }
 
 
