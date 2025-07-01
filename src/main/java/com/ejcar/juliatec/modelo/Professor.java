@@ -1,9 +1,24 @@
 package com.ejcar.juliatec.modelo;
 
-public class Professor {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Professor {
+    @Id
+    private Long id;
     private String nome;
     private String cpf;
+
+
+    public Long getId() {
+        return id;
+       }
+    
+       public void setId(Long id) {
+        this.id = id;
+       }
+    
 
     @Deprecated
     public Professor() {
@@ -65,6 +80,7 @@ public class Professor {
     public String toString() {
         return "Professor [nome=" + nome + ", cpf=" + cpf + "]";
     }
+
 
     
     

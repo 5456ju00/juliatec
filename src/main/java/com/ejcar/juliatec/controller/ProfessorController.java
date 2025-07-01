@@ -20,5 +20,11 @@ public class ProfessorController {
     }
 
 
+    @GetMapping( value = "/insert")
+    public String insert() {
+
+        return "<h1>Tentando Salvar o Professor Dos Aluno</h1>";
+
+    }
     
 }
