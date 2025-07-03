@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ejcar.juliatec.dto.ProfessorDto;
 import com.ejcar.juliatec.modelo.Professor;
 
 
@@ -24,9 +25,9 @@ public class ProfessorController {
 
 
     @GetMapping( value = "/insert")
-    public String insert() {
+    public String insert(ProfessorDto professorDto) {
 
-        Professor professor = new Professor("Julia", "123456789");
+        Professor professor = professorDto.novoProfessor();
         
         System.out.println(professor.toString());
 
