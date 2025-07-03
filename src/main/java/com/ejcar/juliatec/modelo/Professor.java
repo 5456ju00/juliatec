@@ -81,7 +81,5 @@ public class Professor {
         return "Professor [nome=" + nome + ", cpf=" + cpf + "]";
     }
 
-
-    //julia
     
 }
