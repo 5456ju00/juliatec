@@ -3,7 +3,9 @@ package com.ejcar.juliatec.controller;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,21 +36,21 @@ public class ProfessorController {
     }
 
 
-    @GetMapping( value = "/insert")
-    public String insert(@RequestBody ProfessorDto professorDto) {
+    @PostMapping( value = "/insert")
+    public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
         
         System.out.println(professor.toString());
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/id")
-                    .buildAndExpand(professor.getId())
-                    .toUri();
+                                            .path("/id")
+                                            .buildAndExpand(professor.getId())
+                                            .toUri();
 
         professorRepository.save(professor);
 
-        return "<h1>Tentando Salvar o Professor Dos Aluno</h1>";
+        return ResponseEntity.created(uri).body(professor);
 
     }
     
