@@ -40,10 +40,8 @@ public class ProfessorDto {
     } 
 
 
-    public Professor novoProfessor(){
-        
-        return new Professor(nome, cpf);
-
+    public Professor novoProfessor() {
+        return new Professor(this.nome, this.cpf);
     }
     
 }
