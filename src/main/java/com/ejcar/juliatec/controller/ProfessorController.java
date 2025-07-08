@@ -2,6 +2,7 @@ package com.ejcar.juliatec.controller;
 
 import java.net.URI;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,11 @@ public class ProfessorController {
         return "<h1>Júlia</h1>"; // return => Devolve o retorno pra quem chamou
     }
 
+    
+    @GetMapping( value = "/listaprofessor")    
+    public List<Professor> findAll() {
+        return professorRepository.findAll();
+    }
 
     @PostMapping( value = "/insert")
     public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
