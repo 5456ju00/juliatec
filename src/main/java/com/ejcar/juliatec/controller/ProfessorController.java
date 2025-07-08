@@ -3,6 +3,8 @@ package com.ejcar.juliatec.controller;
 import java.net.URI;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,13 +55,25 @@ public class ProfessorController {
 
     }
 
+
     @GetMapping( value = "/{id}")
-    public ResponseEntity<Professor> select(@PathVariable Long id) {
+    public void buscarProfessorPor(@PathVariable Long id) {
 
+        Optional<Professor> professorBanco = professorRepository.findById(id);
         System.out.println( "O valor do id -->" + id);
-        return ResponseEntity.ok().body(professorRepository.findById(id).orElse(null));
-
+        
+        System.out.println("O id --->" + id);
     }
+
+
+    // @GetMapping( value = "/{id}")
+    // public ResponseEntity<Professor> select(@PathVariable Long id) {
+
+    //     Optional<Professor> professorBanco = professorRepository.findById(id);
+    //     System.out.println( "O valor do id -->" + id);
+    //     return ResponseEntity.ok().body(professorRepository.findById(id).orElse(null));
+
+    // }
 
 
 
