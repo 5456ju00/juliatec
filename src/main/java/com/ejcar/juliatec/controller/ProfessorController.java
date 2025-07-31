@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,6 +66,72 @@ public class ProfessorController {
         System.out.println("O id --->" + id);
     }
 
+    
+    @GetMapping( value = "/consultapornome/{nome}" )
+    public ResponseEntity <Professor> buscarpornome(@PathVariable String nome ) {
+        Professor professorBanco =  professorRepository.findByNome(nome);
+        return ResponseEntity.ok(professorBanco);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Professor> atualizarProfessor(@PathVariable Long id, @RequestBody Professor professorAtualizado) {
+        Professor professor = professorRepository.findById(id).get(); 
+
+        professor.setNome(professorAtualizado.getNome());
+        professor.setCpf(professorAtualizado.getCpf());
+
+        professorRepository.save(professor);
+
+        return ResponseEntity.ok(professor);
+    }
+
+    @PostMapping(value = "/insert")
+    public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
+
+        Professor professor = professorDto.novoProfessor();
+        
+        professorRepository.save(professor);
+
+        System.out.println(professor.toString());
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                                            .path("/id")
+                                            .buildAndExpand(professor.getId())
+                                            .toUri();
+
+        return ResponseEntity.created(uri).body(professor);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // @GetMapping( value = "/{id}")
     // public ResponseEntity<Professor> select(@PathVariable Long id) {
@@ -77,25 +144,6 @@ public class ProfessorController {
 
 
 
-    @PostMapping( value = "/insert")
-    public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
-
-        Professor professor = professorDto.novoProfessor();
-        
-        System.out.println(professor.toString());
-
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                                            .path("/id")
-                                            .buildAndExpand(professor.getId())
-                                            .toUri();
-
-        professorRepository.save(professor);
-
-        return ResponseEntity.created(uri).body(professor);
-
-    }
-    
-}
 
 
 
